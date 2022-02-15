@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useState, useEffect } from 'react';
 import styles from './App.css';
 
 export default function App() {
@@ -9,10 +9,20 @@ export default function App() {
   ];
 
   const [items, dispatch] = useReducer(itemsReducer, initialItems);
+  const [newItem, setNewItem] = useState('');
+  const [newEmoji, setNewEmoji] = useState('');
 
-  const handleAddItem = (e) => {
+  useEffect(() => {}, [items]);
+
+  const handleAddItem = (e, item, image) => {
     e.preventDefault();
-    dispatch({ type: 'add', log: 'add new item pressed' });
+    dispatch({
+      type: 'add',
+      id: items.length,
+      item,
+      image,
+      log: `add pressed, adding ${newItem} to list`,
+    });
   };
   const handleEditItem = (id) => {
     dispatch({ type: 'edit', log: `edit ${id} pressed` });
@@ -24,8 +34,7 @@ export default function App() {
   function itemsReducer(items, { type, id, item, image, log }) {
     switch (type) {
       case 'add': {
-        console.log(log);
-        return [...items];
+        return [...items, { id, item, image }];
       }
       case 'edit': {
         console.log(log);
@@ -45,8 +54,24 @@ export default function App() {
       <h1>Shopping List</h1>
       <main>
         <form className={styles.form}>
-          <input type="text" placeholder="new item" aria-label="new-item" />
-          <button aria-label="submit" onClick={handleAddItem}>
+          <input
+            type="text"
+            placeholder="new item"
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+            aria-label="new-item"
+          />
+          <input
+            type="text"
+            placeholder="emoji"
+            value={newEmoji}
+            onChange={(e) => setNewEmoji(e.target.value)}
+            aria-label="emoji"
+          />
+          <button
+            aria-label="submit"
+            onClick={(e) => handleAddItem(e, newItem, newEmoji)}
+          >
             Add Item
           </button>
         </form>
