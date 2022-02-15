@@ -1,0 +1,62 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  padding: 1%;
+  min-height: 100vh;
+  height: 100%;
+  color: #eee;
+  background-color: #333;
+}
+
+.App * {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-transform: lowercase;
+}
+
+.form {
+  display: flex;
+  width: 30vw;
+  gap: 1%;
+  justify-content: space-evenly;
+}
+
+.form > * {
+  min-width: fit-content;
+  width: 45%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+  gap: 1%;
+
+  width: 30vw;
+}
+
+.listItem {
+  display: flex;
+  width: 30vw;
+  height: 3rem;
+  justify-content: space-evenly;
+  gap: 1%;
+  align-items: center;
+}
+
+.listItem h2 {
+  display: inline;
+  min-width: fit-content;
+  width: 15vw;
+}
+
+.listItem button {
+  height: 2rem;
+  min-width: fit-content;
+  width: 5vw;
+}
