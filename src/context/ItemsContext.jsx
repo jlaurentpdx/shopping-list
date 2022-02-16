@@ -31,6 +31,7 @@ export const ItemsProvider = ({ children }) => {
       type: 'add',
       item,
       image,
+      log: `adding ${item} to list`,
     });
   };
   const handleEditItem = (id) => {
@@ -51,13 +52,15 @@ export const ItemsProvider = ({ children }) => {
         return [...items];
       }
       case 'edit': {
-        console.log(log);
+        console.log(action.log);
+        return [...items];
       }
       case 'delete': {
-        console.log(log);
+        console.log(action.log);
+        return [...items];
       }
       default:
-        throw Error(`Unknown case: ${type} is undefined.`);
+        throw Error(`Unknown case: ${action.type} is undefined.`);
     }
   }
 
