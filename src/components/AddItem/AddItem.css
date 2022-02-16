@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  width: 20vw;
+  gap: 1%;
+  justify-content: flex-start;
+}
+
+.form > * {
+  min-width: fit-content;
+  width: 50%;
+  margin: 0;
+}
