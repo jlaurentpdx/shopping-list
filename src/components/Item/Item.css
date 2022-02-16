@@ -1,0 +1,21 @@
+.header {
+  padding: 0;
+  margin: 0;
+  width: 10vw;
+}
+
+.emoji {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.buttons {
+  margin: 10px;
+}
+
+.buttons > * {
+  height: 2rem;
+  min-width: fit-content;
+  width: 3vw;
+  border-radius: 3px;
+}
