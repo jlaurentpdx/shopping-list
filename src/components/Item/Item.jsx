@@ -4,7 +4,7 @@ import styles from './Item.css';
 
 export default function Item({ item }) {
   const [updateItem, setUpdateItem] = useState(item.item);
-  const [updateImage, setUpdateImage] = useState(item.image);
+  const [updateEmoji, setUpdateEmoji] = useState(item.emoji);
   const [editing, setEditing] = useState(false);
   const { handleEditItem, handleDeleteItem } = useItems();
 
@@ -18,30 +18,30 @@ export default function Item({ item }) {
           onChange={(e) => {
             setUpdateItem(e.target.value);
           }}
-          aria-label="Edit item name"
+          aria-label={`Editing ${item.item}`}
           className={styles.header}
         />
         <input
-          value={updateImage}
+          value={updateEmoji}
           onChange={(e) => {
-            setUpdateImage(e.target.value);
+            setUpdateEmoji(e.target.value);
           }}
-          aria-label="Edit item image"
+          aria-label={`Editing ${item.emoji}`}
           className={styles.header}
         />
         <div className={styles.buttons}>
           <button
-            aria-label="save changes"
+            aria-label={`Save changes to ${item.item}`}
             onClick={(e) => {
               e.preventDefault();
-              handleEditItem({ ...item, item: updateItem, image: updateImage });
+              handleEditItem({ ...item, item: updateItem, emoji: updateEmoji });
               setEditing(false);
             }}
           >
             Save
           </button>
           <button
-            aria-label="delete"
+            aria-label={`Delete ${item.item}`}
             onClick={(e) => {
               e.preventDefault();
               handleDeleteItem(item.id);
@@ -56,13 +56,19 @@ export default function Item({ item }) {
     itemContent = (
       <>
         <h2 className={styles.header}>{item.item}</h2>
-        <p className={styles.emoji}>{item.image}</p>
+        <p className={styles.emoji}>{item.emoji}</p>
 
         <div className={styles.buttons}>
-          <button aria-label="edit" onClick={() => setEditing(true)}>
+          <button
+            aria-label={`Edit ${item.item}`}
+            onClick={() => setEditing(true)}
+          >
             Edit
           </button>
-          <button aria-label="delete" onClick={() => handleDeleteItem(item.id)}>
+          <button
+            aria-label={`Delete ${item.item}`}
+            onClick={() => handleDeleteItem(item.id)}
+          >
             Delete
           </button>
         </div>

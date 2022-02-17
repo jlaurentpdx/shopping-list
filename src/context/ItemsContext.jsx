@@ -4,9 +4,9 @@ const ItemsContext = createContext();
 
 export const ItemsProvider = ({ children }) => {
   const initialItems = [
-    { id: 0, item: 'ice cream', image: '🍨' },
-    { id: 1, item: 'donuts', image: '🍩' },
-    { id: 2, item: 'flan', image: '🍮' },
+    { id: 0, item: 'ice cream', emoji: '🍨' },
+    { id: 1, item: 'donuts', emoji: '🍩' },
+    { id: 2, item: 'flan', emoji: '🍮' },
   ];
 
   function itemsReducer(items, action) {
@@ -14,13 +14,13 @@ export const ItemsProvider = ({ children }) => {
       case 'add': {
         return [
           ...items,
-          { id: action.id, item: action.item, image: action.image },
+          { id: action.id, item: action.item, emoji: action.emoji },
         ];
       }
       case 'edit': {
         return items.map((item) => {
-          if (item.id === action.task.id) {
-            return action.task;
+          if (item.id === action.item.id) {
+            return action.item;
           }
           return item;
         });
@@ -35,19 +35,19 @@ export const ItemsProvider = ({ children }) => {
 
   const [items, dispatch] = useReducer(itemsReducer, initialItems);
 
-  const handleAddItem = (e, item, image) => {
+  const handleAddItem = (e, item, emoji) => {
     e.preventDefault();
     dispatch({
       type: 'add',
       id: items.length,
       item,
-      image,
+      emoji,
     });
   };
-  const handleEditItem = (task) => {
+  const handleEditItem = (item) => {
     dispatch({
       type: 'edit',
-      task,
+      item,
     });
   };
   const handleDeleteItem = (taskId) => {

@@ -6,7 +6,7 @@ export default function ItemList() {
   const { items } = useItems();
 
   return (
-    <ul className={styles.list}>
+    <ul className={styles.list} aria-label="your items">
       {items.map((item) => (
         <li key={item.id} className={styles.card}>
           <Item item={item} />
