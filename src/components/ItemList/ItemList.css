@@ -1,10 +1,11 @@
 .list {
   display: flex;
+  flex-wrap: wrap;
 
   padding: 0;
-  gap: 5%;
+  gap: 20px;
 
-  width: 30vw;
+  width: 100%;
 }
 
 .card {

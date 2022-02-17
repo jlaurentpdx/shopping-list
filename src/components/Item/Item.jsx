@@ -76,5 +76,5 @@ export default function Item({ item }) {
     );
   }
 
-  return <div>{itemContent}</div>;
+  return <>{itemContent}</>;
 }
