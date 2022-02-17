@@ -1,12 +1,12 @@
+import { useState } from 'react';
+import { useItems } from '../../context/ItemsContext';
 import styles from './AddItem';
 
-export default function AddItem({
-  item,
-  setItem,
-  image,
-  setImage,
-  handleAddItem,
-}) {
+export default function AddItem() {
+  const [item, setItem] = useState('');
+  const [image, setImage] = useState('');
+  const { handleAddItem } = useItems();
+
   return (
     <form className={styles.form}>
       <input
