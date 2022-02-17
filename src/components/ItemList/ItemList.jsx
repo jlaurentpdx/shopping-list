@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styles from './ItemList.css';
 
 export default function ItemList({ items, handleEditItem, handleDeleteItem }) {

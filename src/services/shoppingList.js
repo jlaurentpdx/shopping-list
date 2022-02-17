@@ -9,3 +9,8 @@ export const addItem = async (item) => {
   const resp = await client.from('shopping-list').insert([item]);
   return checkError(resp);
 };
+
+export const deleteItem = async (item) => {
+  const resp = await client.from('shopping-list').delete().eq('id', item.id);
+  return checkError(resp);
+};

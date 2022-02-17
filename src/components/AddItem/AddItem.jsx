@@ -25,7 +25,10 @@ export default function AddItem({
       />
       <button
         aria-label="submit"
-        onClick={(e) => handleAddItem(e, item, image)}
+        onClick={(e) => {
+          e.preventDefault();
+          handleAddItem({ item, image });
+        }}
       >
         Add Item
       </button>

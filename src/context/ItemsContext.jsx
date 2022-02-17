@@ -10,29 +10,28 @@ import { fetchList, addItem } from '../services/shoppingList';
 export const ItemsContext = createContext();
 
 export const ItemsProvider = ({ children }) => {
+  const [items, dispatch] = useReducer(itemsReducer, []);
+
   const [loading, setLoading] = useState(true);
+  const [item, setItem] = useState('');
+  const [image, setImage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchList();
-      dispatch({ type: 'init', list: data });
+      console.log('data', data);
+      data.map((item) => {
+        console.log('item', item);
+        handleAddItem(item);
+      });
       setLoading(false);
     };
     fetchData();
   }, []);
 
-  const [items, dispatch] = useReducer(itemsReducer, []);
-  const [item, setItem] = useState('');
-  const [image, setImage] = useState('');
-
-  const handleAddItem = (e, item, image) => {
-    e.preventDefault();
-    dispatch({
-      type: 'add',
-      item,
-      image,
-      log: `adding ${item} to list`,
-    });
+  const handleAddItem = async ({ id, item, image }) => {
+    if (!id) await addItem({ item, image });
+    dispatch({ type: 'add', id, item, image });
   };
   const handleEditItem = (id) => {
     dispatch({ type: 'edit', log: `edit ${id} pressed` });
@@ -43,15 +42,13 @@ export const ItemsProvider = ({ children }) => {
 
   function itemsReducer(items, action) {
     switch (action.type) {
-      case 'init': {
-        return action.list;
-      }
       case 'add': {
-        console.log(action.log);
-        addItem({ item: action.item, image: action.image });
-        return [...items];
+        return [
+          ...items,
+          { id: action.id, item: action.item, image: action.image },
+        ];
       }
-      case 'edit': {
+      case 'update': {
         console.log(action.log);
         return [...items];
       }
