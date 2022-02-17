@@ -14,10 +14,9 @@ export const ItemsProvider = ({ children }) => {
   const [items, dispatch] = useReducer(itemsReducer, []);
   const [loading, setLoading] = useState(true);
 
-  const onReloadNeeded = useCallback(async () => {
+  useEffect(() => {
     const fetchData = async () => {
       const data = await fetchList();
-      console.log('data', data);
       data.map((item) => {
         handleAddItem(item);
       });
@@ -26,12 +25,12 @@ export const ItemsProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    onReloadNeeded();
-  }, []);
-
   const handleAddItem = async ({ id, item, image }) => {
-    if (!id) await addItem({ item, image });
+    if (!id) {
+      const resp = await addItem({ item, image });
+      id = resp[0].id;
+    }
+
     dispatch({ type: 'add', id, item, image });
   };
 
@@ -53,11 +52,9 @@ export const ItemsProvider = ({ children }) => {
         ];
       }
       case 'update': {
-        console.log(action.log);
         return [...items];
       }
       case 'delete': {
-        console.log(action.log);
         return [...items];
       }
       default:

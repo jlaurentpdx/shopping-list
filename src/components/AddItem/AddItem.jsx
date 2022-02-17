@@ -26,7 +26,6 @@ export default function AddItem({ onReloadNeeded, handleAddItem }) {
         onClick={(e) => {
           e.preventDefault();
           handleAddItem({ item, image });
-          onReloadNeeded();
         }}
       >
         Add Item
