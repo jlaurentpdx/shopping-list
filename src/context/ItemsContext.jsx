@@ -28,6 +28,9 @@ export const ItemsProvider = ({ children }) => {
       case 'delete': {
         return items.filter((item) => item.id !== action.id);
       }
+      case 'clear': {
+        return [];
+      }
       default:
         throw Error(`Unknown action: ${action.type} is undefined.`);
     }
@@ -54,9 +57,19 @@ export const ItemsProvider = ({ children }) => {
     dispatch({ type: 'delete', id: taskId });
   };
 
+  const handleClearItems = () => {
+    dispatch({ type: 'clear' });
+  };
+
   return (
     <ItemsContext.Provider
-      value={{ items, handleAddItem, handleEditItem, handleDeleteItem }}
+      value={{
+        items,
+        handleAddItem,
+        handleEditItem,
+        handleDeleteItem,
+        handleClearItems,
+      }}
     >
       {children}
     </ItemsContext.Provider>

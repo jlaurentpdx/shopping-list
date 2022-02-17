@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5%;
+}
+
+.title {
+  margin: 1%;
+}
+
+.button {
+  height: 2rem;
+  min-width: fit-content;
+  width: 3vw;
+  border-radius: 3px;
+}
