@@ -1,27 +1,24 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
   useState,
 } from 'react';
-import { fetchList, addItem } from '../services/shoppingList';
+import { fetchList, addItem, deleteItem } from '../services/shoppingList';
 
 export const ItemsContext = createContext();
 
 export const ItemsProvider = ({ children }) => {
   const [items, dispatch] = useReducer(itemsReducer, []);
-
   const [loading, setLoading] = useState(true);
-  const [item, setItem] = useState('');
-  const [image, setImage] = useState('');
 
-  useEffect(() => {
+  const onReloadNeeded = useCallback(async () => {
     const fetchData = async () => {
       const data = await fetchList();
       console.log('data', data);
       data.map((item) => {
-        console.log('item', item);
         handleAddItem(item);
       });
       setLoading(false);
@@ -29,15 +26,22 @@ export const ItemsProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    onReloadNeeded();
+  }, []);
+
   const handleAddItem = async ({ id, item, image }) => {
     if (!id) await addItem({ item, image });
     dispatch({ type: 'add', id, item, image });
   };
+
   const handleEditItem = (id) => {
     dispatch({ type: 'edit', log: `edit ${id} pressed` });
   };
-  const handleDeleteItem = ({ id, item }) => {
-    dispatch({ type: 'delete', id, item, log: `delete ${item} pressed` });
+
+  const handleDeleteItem = async ({ id, item }) => {
+    await deleteItem(id);
+    dispatch({ type: 'delete', item, log: `delete ${item} pressed` });
   };
 
   function itemsReducer(items, action) {
@@ -66,10 +70,7 @@ export const ItemsProvider = ({ children }) => {
       value={{
         loading,
         items,
-        item,
-        setItem,
-        image,
-        setImage,
+        onReloadNeeded,
         handleAddItem,
         handleEditItem,
         handleDeleteItem,

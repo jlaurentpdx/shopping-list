@@ -1,7 +1,11 @@
-import { useEffect } from 'react';
 import styles from './ItemList.css';
 
-export default function ItemList({ items, handleEditItem, handleDeleteItem }) {
+export default function ItemList({
+  items,
+  onReloadNeeded,
+  handleEditItem,
+  handleDeleteItem,
+}) {
   return (
     <ul className={styles.list}>
       {items.map((item) => (
@@ -12,7 +16,12 @@ export default function ItemList({ items, handleEditItem, handleDeleteItem }) {
             <button aria-label="edit" onClick={() => handleEditItem(item.item)}>
               Edit
             </button>
-            <button aria-label="delete" onClick={() => handleDeleteItem(item)}>
+            <button
+              aria-label="delete"
+              onClick={() => {
+                handleDeleteItem(item);
+              }}
+            >
               Delete
             </button>
           </div>

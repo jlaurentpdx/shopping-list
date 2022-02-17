@@ -4,30 +4,23 @@ import { useItems } from '../../context/ItemsContext';
 
 export default function Home() {
   const {
-    loading,
-    item,
-    setItem,
-    image,
-    setImage,
-    handleAddItem,
     items,
+    loading,
+    onReloadNeeded,
+    handleAddItem,
     handleEditItem,
     handleDeleteItem,
   } = useItems();
+
   if (loading) return <h1>loading...</h1>;
 
   return (
     <main>
       <h1>Shopping List</h1>
-      <AddItem
-        item={item}
-        setItem={setItem}
-        image={image}
-        setImage={setImage}
-        handleAddItem={handleAddItem}
-      />
+      <AddItem onReloadNeeded={onReloadNeeded} handleAddItem={handleAddItem} />
       <ItemList
         items={items}
+        onReloadNeeded={onReloadNeeded}
         handleEditItem={handleEditItem}
         handleDeleteItem={handleDeleteItem}
       />

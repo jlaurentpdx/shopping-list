@@ -1,12 +1,10 @@
+import { useState } from 'react';
 import styles from './AddItem';
 
-export default function AddItem({
-  item,
-  setItem,
-  image,
-  setImage,
-  handleAddItem,
-}) {
+export default function AddItem({ onReloadNeeded, handleAddItem }) {
+  const [item, setItem] = useState('');
+  const [image, setImage] = useState('');
+
   return (
     <form className={styles.form}>
       <input
@@ -28,6 +26,7 @@ export default function AddItem({
         onClick={(e) => {
           e.preventDefault();
           handleAddItem({ item, image });
+          onReloadNeeded();
         }}
       >
         Add Item

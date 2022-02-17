@@ -10,7 +10,7 @@ export const addItem = async (item) => {
   return checkError(resp);
 };
 
-export const deleteItem = async (item) => {
-  const resp = await client.from('shopping-list').delete().eq('id', item.id);
+export const deleteItem = async (id) => {
+  const resp = await client.from('shopping-list').delete().eq('id', id);
   return checkError(resp);
 };
