@@ -1,9 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
+import { ThemeProvider } from './context/ThemeContext';
 
 test('renders a shopping list with options to add, edit, delete ', () => {
-  render(<App />);
+  render(
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
 
   // Verify that all default content renders, ensure list contains 3 items
   screen.getByRole('heading', { name: /shopping list/i });
@@ -63,4 +68,8 @@ test('renders a shopping list with options to add, edit, delete ', () => {
   expect(deleteSodaButton).not.toBeInTheDocument();
 
   expect(itemList.children).toHaveLength(3);
+
+  // Header testing
+
+  screen.get;
 });

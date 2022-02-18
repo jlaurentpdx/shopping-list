@@ -1,21 +1,41 @@
+.editForm {
+  display: flex;
+  flex-direction: row;
+  width: 20vw;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  min-width: max-content;
+  width: 20vw;
+
+  text-align: left;
+  font-size: 2rem;
+}
+
 .header {
-  padding: 0;
+  min-width: 100px;
+  width: 15vw;
+  max-width: 250px;
   margin: 0;
-  width: 10vw;
 }
 
 .emoji {
-  font-size: 4rem;
   margin: 0;
+  min-width: fit-content;
+  width: 4vw;
+  filter: drop-shadow(2px 2px 0px #555);
 }
 
 .buttons {
-  margin: 10px;
+  display: flex;
+  gap: 5%;
+  min-width: fit-content;
+  width: 20vw;
 }
 
-.buttons > * {
-  height: 2rem;
+.buttons > button {
+  font-size: 1.5rem;
   min-width: fit-content;
-  width: 3vw;
-  border-radius: 3px;
 }

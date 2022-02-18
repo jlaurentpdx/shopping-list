@@ -2,24 +2,54 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: auto;
 }
 
 .App {
-  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   min-height: 100vh;
   height: 100%;
-  color: #eee;
-  background-color: #df367c;
-}
+  min-width: 100vw;
+  width: 100%;
 
-.App.dark {
-  color: lightpink;
-  background-color: #333;
+  color: #333;
+  background-image: radial-gradient(#aaa 0.5px, transparent 0.5px);
+  background-size: 13px 13px;
+  background-color: #e7e1e3;
+
+  transition: 0.5s all;
+  font-family: 'Nunito', sans-serif;
 }
 
 .App * {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   text-transform: lowercase;
-  filter: drop-shadow(1px 1px 0 darkslategray);
+}
+
+.App.dark {
+  color: white;
+  background-image: radial-gradient(#888 0.5px, transparent 0.5px);
+  background-size: 13px 13px;
+  background-color: #333;
+
+  transition: 0.3s all;
+}
+
+.App button,
+.App input {
+  color: #333;
+  background-color: #ddd;
+  border-radius: 3px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.App.dark button,
+.App.dark input {
+  color: #ddd;
+  background-color: #333;
+  border-radius: 3px;
+  font-family: 'Nunito', sans-serif;
 }

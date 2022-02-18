@@ -9,27 +9,38 @@ export default function Header() {
   return (
     <header>
       <h1 className={styles.title}>Shopping List</h1>
-      {items.length === 1 ? (
-        <p>{items.length} item on your list</p>
-      ) : (
-        <p>{items.length} items on your list</p>
-      )}
-      {items.length > 0 && (
-        <button
-          onClick={handleClearItems}
-          className={styles.button}
-          aria-label="Clear item list"
-        >
-          clear all
-        </button>
-      )}
-      <button
-        onClick={toggleTheme}
-        className={styles.button}
-        aria-label="toggle theme"
-      >
-        {theme} mode
-      </button>
+      <div className={styles.container}>
+        <div className={styles.top}>
+          {items.length === 1 ? (
+            <span>you have {items.length} item on your list. </span>
+          ) : (
+            <span>you have {items.length} items on your list. </span>
+          )}{' '}
+          {items.length > 0 && (
+            <span
+              onClick={handleClearItems}
+              className={styles.button}
+              aria-label="Clear item list"
+            >
+              {' '}
+              clear all?
+            </span>
+          )}
+        </div>
+        <div className={styles.bottom}>
+          <p>
+            Viewing in {theme} mode.
+            <span
+              onClick={toggleTheme}
+              className={styles.button}
+              aria-label="toggle theme"
+            >
+              {' '}
+              Click to switch.
+            </span>
+          </p>
+        </div>
+      </div>
     </header>
   );
 }

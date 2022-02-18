@@ -12,7 +12,7 @@ export default function Item({ item }) {
 
   if (editing) {
     itemContent = (
-      <form>
+      <form className={styles.editForm}>
         <input
           value={updateItem}
           onChange={(e) => {
@@ -29,35 +29,35 @@ export default function Item({ item }) {
           aria-label={`Editing ${item.emoji}`}
           className={styles.header}
         />
-        <div className={styles.buttons}>
-          <button
-            aria-label={`Save changes to ${item.item}`}
-            onClick={(e) => {
-              e.preventDefault();
-              handleEditItem({ ...item, item: updateItem, emoji: updateEmoji });
-              setEditing(false);
-            }}
-          >
-            Save
-          </button>
-          <button
-            aria-label={`Delete ${item.item}`}
-            onClick={(e) => {
-              e.preventDefault();
-              handleDeleteItem(item.id);
-            }}
-          >
-            Delete
-          </button>
-        </div>
+
+        <button
+          aria-label={`Save changes to ${item.item}`}
+          onClick={(e) => {
+            e.preventDefault();
+            handleEditItem({ ...item, item: updateItem, emoji: updateEmoji });
+            setEditing(false);
+          }}
+        >
+          Save
+        </button>
+        <button
+          aria-label={`Delete ${item.item}`}
+          onClick={(e) => {
+            e.preventDefault();
+            handleDeleteItem(item.id);
+          }}
+        >
+          Delete
+        </button>
       </form>
     );
   } else {
     itemContent = (
       <>
-        <h2 className={styles.header}>{item.item}</h2>
-        <p className={styles.emoji}>{item.emoji}</p>
-
+        <div className={styles.item}>
+          <p className={styles.emoji}>{item.emoji}</p>
+          <h3 className={styles.header}>{item.item}</h3>
+        </div>
         <div className={styles.buttons}>
           <button
             aria-label={`Edit ${item.item}`}
