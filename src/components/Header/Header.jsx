@@ -1,8 +1,11 @@
 import { useItems } from '../../context/ItemsContext';
+import { useTheme } from '../../context/ThemeContext';
 import styles from './Header.css';
 
 export default function Header() {
   const { items, handleClearItems } = useItems();
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <header>
       <h1 className={styles.title}>Shopping List</h1>
@@ -20,6 +23,13 @@ export default function Header() {
           clear all
         </button>
       )}
+      <button
+        onClick={toggleTheme}
+        className={styles.button}
+        aria-label="toggle theme"
+      >
+        {theme} mode
+      </button>
     </header>
   );
 }
