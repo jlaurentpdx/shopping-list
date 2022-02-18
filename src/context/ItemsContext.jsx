@@ -1,13 +1,21 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
+import { useLocalStorage } from '../hooks/hooks';
+import { v4 as uuid } from 'uuid';
 
 const ItemsContext = createContext();
 
 export const ItemsProvider = ({ children }) => {
-  const initialItems = [
-    { id: 0, item: 'ice cream', emoji: '🍨' },
-    { id: 1, item: 'donuts', emoji: '🍩' },
-    { id: 2, item: 'flan', emoji: '🍮' },
-  ];
+  const [local, setLocal] = useLocalStorage('shopping-list', [
+    { id: uuid(), item: 'ice cream', emoji: '🍨' },
+    { id: uuid(), item: 'donuts', emoji: '🍩' },
+    { id: uuid(), item: 'flan', emoji: '🍮' },
+  ]);
+
+  const [items, dispatch] = useReducer(itemsReducer, local);
+
+  useEffect(() => {
+    setLocal(items);
+  }, [items]);
 
   function itemsReducer(items, action) {
     switch (action.type) {
@@ -36,27 +44,21 @@ export const ItemsProvider = ({ children }) => {
     }
   }
 
-  const [items, dispatch] = useReducer(itemsReducer, initialItems);
-
   const handleAddItem = (e, item, emoji) => {
     e.preventDefault();
     dispatch({
       type: 'add',
-      id: items.length,
+      id: uuid(),
       item,
       emoji,
     });
   };
   const handleEditItem = (item) => {
-    dispatch({
-      type: 'edit',
-      item,
-    });
+    dispatch({ type: 'edit', item });
   };
   const handleDeleteItem = (taskId) => {
     dispatch({ type: 'delete', id: taskId });
   };
-
   const handleClearItems = () => {
     dispatch({ type: 'clear' });
   };
