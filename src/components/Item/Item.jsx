@@ -32,8 +32,7 @@ export default function Item({ item }) {
 
         <button
           aria-label={`Save changes to ${item.item}`}
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             handleEditItem({ ...item, item: updateItem, emoji: updateEmoji });
             setEditing(false);
           }}
@@ -42,8 +41,7 @@ export default function Item({ item }) {
         </button>
         <button
           aria-label={`Delete ${item.item}`}
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             handleDeleteItem(item.id);
           }}
         >
